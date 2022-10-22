@@ -1,7 +1,7 @@
 const {
   tokenizer,
   parser,
-  // transformer,
+  transformer,
   // codeGenerator,
   // compiler,
 } = require("./copy-the-super-tiny-compiler");
@@ -101,11 +101,11 @@ assert.deepStrictEqual(
   ast,
   "Parser should turn `tokens` array into `ast`"
 );
-// assert.deepStrictEqual(
-//   transformer(ast),
-//   newAst,
-//   "Transformer should turn `ast` into a `newAst`"
-// );
+assert.deepStrictEqual(
+  transformer(ast),
+  newAst,
+  "Transformer should turn `ast` into a `newAst`"
+);
 // assert.deepStrictEqual(
 //   codeGenerator(newAst),
 //   output,
