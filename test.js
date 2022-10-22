@@ -1,6 +1,6 @@
 const {
   tokenizer,
-  // parser,
+  parser,
   // transformer,
   // codeGenerator,
   // compiler,
@@ -96,11 +96,11 @@ assert.deepStrictEqual(
   tokens,
   "Tokenizer should turn `input` string into `tokens` array"
 );
-// assert.deepStrictEqual(
-//   parser(tokens),
-//   ast,
-//   "Parser should turn `tokens` array into `ast`"
-// );
+assert.deepStrictEqual(
+  parser(tokens),
+  ast,
+  "Parser should turn `tokens` array into `ast`"
+);
 // assert.deepStrictEqual(
 //   transformer(ast),
 //   newAst,

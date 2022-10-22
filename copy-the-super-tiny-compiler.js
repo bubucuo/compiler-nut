@@ -64,6 +64,57 @@ function tokenizer(input) {
   return tokens;
 }
 
+// 语法分析
+// 生成以表达式为节点的树
+function parser(tokens) {
+  const ast = {
+    type: "Program",
+    body: [],
+  };
+
+  let current = 0;
+
+  function walk() {
+    let token = tokens[current];
+
+    if (token.type === "number") {
+      current++;
+      return {
+        type: "NumberLiteral",
+        value: token.value,
+      };
+    }
+
+    if (token.type === "paren" && token.value === "(") {
+      token = tokens[++current];
+      let node = {
+        type: "CallExpression",
+        name: token.value,
+        params: [],
+      };
+
+      token = tokens[++current];
+
+      while (
+        token.type !== "paren" ||
+        (token.type === "paren" && token.value !== ")")
+      ) {
+        node.params.push(walk());
+        token = tokens[current];
+      }
+
+      current++;
+      return node;
+    }
+  }
+
+  while (current < tokens.length) {
+    ast.body.push(walk());
+  }
+
+  return ast;
+}
+
 // 一个编译器
 // function compiler(input) {
 //   // 词法分析
@@ -78,7 +129,7 @@ function tokenizer(input) {
 
 module.exports = {
   tokenizer,
-  // parser,
+  parser,
   // traverser,
   // transformer,
   // codeGenerator,
