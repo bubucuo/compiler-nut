@@ -2,8 +2,8 @@ const {
   tokenizer,
   parser,
   transformer,
-  // codeGenerator,
-  // compiler,
+  codeGenerator,
+  compiler,
 } = require("./copy-the-super-tiny-compiler");
 const assert = require("assert");
 
@@ -106,15 +106,15 @@ assert.deepStrictEqual(
   newAst,
   "Transformer should turn `ast` into a `newAst`"
 );
-// assert.deepStrictEqual(
-//   codeGenerator(newAst),
-//   output,
-//   "Code Generator should turn `newAst` into `output` string"
-// );
-// assert.deepStrictEqual(
-//   compiler(input),
-//   output,
-//   "Compiler should turn `input` into `output`"
-// );
+assert.deepStrictEqual(
+  codeGenerator(newAst),
+  output,
+  "Code Generator should turn `newAst` into `output` string"
+);
+assert.deepStrictEqual(
+  compiler(input),
+  output,
+  "Compiler should turn `input` into `output`"
+);
 
 console.log("All Passed!");

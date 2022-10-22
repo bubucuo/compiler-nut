@@ -189,23 +189,51 @@ function transformer(ast) {
 
   return newAst;
 }
-// 一个编译器
-// function compiler(input) {
-//   // 词法分析
-//   let tokens = tokenizer(input);
-//   let ast = parser(tokens);
-//   let newAst = transformer(ast);
-//   let output = codeGenerator(newAst);
 
-//   // and simply return the output!
-//   return output;
-// }
+function codeGenerator(node) {
+  switch (node.type) {
+    case "Program":
+      return node.body.map(codeGenerator).join("\n");
+
+    case "ExpressionStatement":
+      return codeGenerator(node.expression) + ";";
+
+    case "CallExpression":
+      return (
+        codeGenerator(node.callee) +
+        "(" +
+        node.arguments.map(codeGenerator).join(", ") +
+        ")"
+      );
+
+    case "Identifier":
+      return node.name;
+
+    case "NumberLiteral":
+      return node.value;
+
+    default:
+      throw new TypeError(node.type);
+  }
+}
+
+// 一个编译器
+function compiler(input) {
+  // 词法分析
+  let tokens = tokenizer(input);
+  let ast = parser(tokens);
+  let newAst = transformer(ast);
+  let output = codeGenerator(newAst);
+
+  // and simply return the output!
+  return output;
+}
 
 module.exports = {
   tokenizer,
   parser,
   traverser,
   transformer,
-  // codeGenerator,
-  // compiler,
+  codeGenerator,
+  compiler,
 };
