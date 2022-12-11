@@ -9,8 +9,11 @@ const {
 const {extend} = require("@vue/shared");
 
 function compile(template, options) {
+  // 1. parse 生成ast
   const ast = baseParse(template);
 
+  // 2. transform ，转化ast
+  // node、指令
   const prefixIdentifiers = false;
 
   const [nodeTransforms, directiveTransforms] =
@@ -20,7 +23,10 @@ function compile(template, options) {
     ast,
     extend({}, options, {
       prefixIdentifiers,
-      nodeTransforms: [...nodeTransforms, ...(options.nodeTransforms || [])],
+      nodeTransforms: [
+        ...nodeTransforms,
+        ...(options.nodeTransforms || []), // user transforms
+      ],
       directiveTransforms: extend(
         {},
         directiveTransforms,
@@ -29,6 +35,7 @@ function compile(template, options) {
     })
   );
 
+  // 3. generate ，生成目标代码
   return generate(
     ast,
     extend({}, options, {
@@ -37,9 +44,9 @@ function compile(template, options) {
   );
 }
 
-const {code} = compile("<div>Hello World</div>", {
+const {code} = compile("<div>Hello World!</div>", {
+  filename: "foo.vue",
   sourceMap: true,
-  filename: `foo.vue`,
 });
 
 fs.writeFileSync("../dist/vue.js", code);
