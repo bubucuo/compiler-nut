@@ -1,6 +1,6 @@
 const jsx = require("@babel/plugin-syntax-jsx").default;
 const types = require("@babel/types");
-const {types: t} = require("@babel/core");
+const { types: t } = require("@babel/core");
 
 module.exports = function () {
   return {
@@ -20,7 +20,7 @@ module.exports = function () {
 function buildJSXElementCall(path, file) {
   const openingPath = path.get("openingElement");
 
-  const {name} = openingPath.node.name; // div
+  const { name } = openingPath.node.name; // div
 
   const tag = types.stringLiteral(name);
 
