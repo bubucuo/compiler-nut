@@ -1,1 +1,1 @@
-<div className="omg_className">text</div>
+<div className="omg_className">text</div>;

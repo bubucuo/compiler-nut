@@ -21,6 +21,8 @@
     "@babel/types": "^7.20.5"
   },
   "dependencies": {
-    "esbuild": "^0.25.8"
+    "@swc/core": "^1.13.2",
+    "esbuild": "^0.25.8",
+    "typescript": "^5.8.3"
   }
 }
