@@ -5,7 +5,7 @@ const babel = require("@babel/core");
 const { code } = require("@babel/core").transformSync(
   `<div className="omg_className">text</div>`,
   {
-    plugins: [["@babel/plugin-transform-react-jsx"]], // 默认是classic
+    plugins: [["@babel/plugin-transform-react-jsx", { runtime: "automatic" }]], // 默认是 classic
     // plugins: [
     //   ["./my-babel-plugin-transform-react-jsx.js", { runtime: "automatic" }],
     // ],

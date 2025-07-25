@@ -18,9 +18,7 @@
     "@babel/preset-env": "^7.19.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/traverse": "^7.19.4",
-    "@babel/types": "^7.20.5"
-  },
-  "dependencies": {
+    "@babel/types": "^7.20.5",
     "@swc/core": "^1.13.2",
     "esbuild": "^0.25.8",
     "typescript": "^5.8.3"

@@ -1,3 +1,5 @@
-/*#__PURE__*/React.createElement("div", {
-  className: "omg_className"
-}, "text");
+import { jsx as _jsx } from "react/jsx-runtime";
+/*#__PURE__*/_jsx("div", {
+  className: "omg_className",
+  children: "text"
+});
